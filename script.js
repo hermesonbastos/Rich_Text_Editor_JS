@@ -25,8 +25,6 @@ const initializer = () => {
   highlighter(formatButtons, false);
   highlighter(scriptButtons, true);
 
-  console.log(fontName)
-
   fontList.map((value) => {
     let option = document.createElement("option");
     option.value = value;
@@ -44,6 +42,31 @@ const initializer = () => {
   fontSizeRef.value = 3;
 };
 
+const modifyText = (command, defaultUI, value) => {
+  document.execCommand(command, defaultUI, value);
+}
+
+optionsButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    modifyText(button.id, false, null);
+  })
+})
+
+advancedOptionButton.forEach(button => {
+  button.addEventListener("change", () => {
+    modifyText(button.id, false, button.value);
+  })
+})
+
+linkButton.addEventListener("click", () => {
+  let userLink = prompt("Enter a URL");
+  if(/http/i.test(userLink)) {
+    modifyText(linkButton.id, false, userLink);
+  } else {
+    userLink = "http://" + userLink;
+    modifyText(linkButton.id, false, userLink);
+  }
+})
 
 const highlighter = (className, needsRemoval) => {
   className.forEach((button) => {
