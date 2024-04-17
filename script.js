@@ -24,7 +24,26 @@ const initializer = () => {
   highlighter(spacingButtons, true);
   highlighter(formatButtons, false);
   highlighter(scriptButtons, true);
+
+  console.log(fontName)
+
+  fontList.map((value) => {
+    let option = document.createElement("option");
+    option.value = value;
+    option.innerHTML = value;
+    fontName.appendChild(option);
+  });
+
+  for(let i = 1; i <= 7; i++) {
+    let option = document.createElement("option");
+    option.value = i;
+    option.innerHTML = i;
+    fontSizeRef.appendChild(option);
+  }
+
+  fontSizeRef.value = 3;
 };
+
 
 const highlighter = (className, needsRemoval) => {
   className.forEach((button) => {
